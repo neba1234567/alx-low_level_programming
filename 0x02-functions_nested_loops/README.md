@@ -1,1 +1,1 @@
-a read me for functions and loops
+my first readme 
