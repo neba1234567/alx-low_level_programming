@@ -1,46 +1,28 @@
+#include <stdio.h>
 #include "holberton.h"
+
 /**
  * _strstr - Entry point
- *
- * @haystack: cadena_1
- *
- * @needle: cadena_2
- *
+ * @haystack: input
+ * @needle: input
  * Return: Always 0 (Success)
  */
 char *_strstr(char *haystack, char *needle)
 {
-	int i, j, k, n, contador;
+	for (; *haystack != '\0'; haystack++)
+	{
+		char *one = haystack;
+		char *two = needle;
 
-	contador = 0;
-	for (i = 0 ; needle[i] != '\0' ; i++)
-	{
-		contador++;
-	}
-	for (j = 0 ; haystack[j] != '\0' ; j++)
-	{
-		for (k = 0 ; needle[k] != '\0' ; k++)
+		while (*one == *two && *two != '\0')
 		{
-			if (haystack[j] == ' ')
-			{
-				n = 0;
-			}
-			if (haystack[j] == needle[k])
-			{
-				n++;
-			}
-			if (n == contador)
-			{
-				return (&(haystack[j - k]));
-			}
+			one++;
+			two++;
 		}
+
+		if (*two == '\0')
+			return (haystack);
 	}
-	if (needle[0] == '\0')
-	{
-		return (&(haystack[0]));
-	}
-	else
-	{
-		return ('\0');
-	}
+
+	return (NULL);
 }

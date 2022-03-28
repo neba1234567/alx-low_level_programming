@@ -1,26 +1,24 @@
+#include <stdio.h>
 #include "holberton.h"
+
 /**
  * _strpbrk - Entry point
- *
- * @s: cadena_1
- *
- * @accept: cadena_2
- *
+ * @s: input
+ * @accept: input
  * Return: Always 0 (Success)
  */
 char *_strpbrk(char *s, char *accept)
 {
-	unsigned int i, j;
+	int i, n;
 
-	for (i = 0 ; s[i] != '\0' && s[i] != ' ' ; i++)
+	for (i = 0; s[i] != '\0'; i++)
 	{
-		for (j = 0 ; accept[j] != '\0' ; j++)
+		for (n = 0; accept[n] != '\0'; n++)
 		{
-			if (s[i] == accept[j])
-			{
+			if (s[i] == accept[n])
 				return (s + i);
-			}
 		}
 	}
-	return ('\0');
+
+	return (NULL);
 }

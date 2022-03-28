@@ -1,30 +1,20 @@
-#include "holberton.h"
 #include <stdio.h>
+#include "holberton.h"
+
 /**
  * print_diagsums - Entry point
- *
- * @a: puntero
- *
- * @size: tamaño de la matriz
- *
+ * @a: input
+ * @size: input
  * Return: Always 0 (Success)
  */
 void print_diagsums(int *a, int size)
 {
-	int i, j, der, izq, l;
+	int i, n, total1 = 0, total2 = 0;
 
-	der = 0;
-	izq = 0;
-	l = size - 1;
-	for (i = 0 ; i < size ; i++)
-	{
-		der = der + *(a + i * size + i);
-	}
-	printf("%d, ", der);
-	for (j = 0 ; j < size ; j++)
-	{
-		izq = izq + *(a + j * size + l);
-		l--;
-	}
-	printf("%d\n", izq);
+	for (i = 0; i <= (size * size); i = i + size + 1)
+		total1 = total1 + a[i];
+
+	for (n = size - 1; n <= (size * size) - size; n = n + size - 1)
+		total2 = total2 + a[n];
+	printf("%d, %d\n", total1, total2);
 }
