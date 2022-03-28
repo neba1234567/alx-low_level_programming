@@ -1,33 +1,23 @@
-#include "holberton.h"
+#include "main.h"
 
 /**
- * _memset - Entry point
- * @s: pointed destination
- * @b: constant byte
- * @n: bytes
- * Return: Always 0 (Success)
+ * _memset - fills a memory block with a constant byte
+ * @s: address to memory block
+ * @b: char to be used
+ * @n: number of bytes to be used
+ *
+ * Return: pointer to the memory block
  */
 char *_memset(char *s, char b, unsigned int n)
 {
-	unsigned int i;
+unsigned int i;
 
-	for (i = 0; i < n; i++)
-		s[i] = b;
-	return (s);
-}#include "holberton.h"
+i = 0;
 
-/**
- * _memset - Entry point
- * @s: pointed destination
- * @b: constant byte
- * @n: bytes
- * Return: Always 0 (Success)
- */
-char *_memset(char *s, char b, unsigned int n)
+while (i < n)
 {
-	unsigned int i;
-
-	for (i = 0; i < n; i++)
-		s[i] = b;
-	return (s);
+s[i] = b;
+i++;
+}
+return (s);
 }

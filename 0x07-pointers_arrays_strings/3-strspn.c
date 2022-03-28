@@ -1,32 +1,44 @@
-#include "holberton.h"
+#include "main.h"
 
 /**
- * _strspn - a function that gets the length of a prefix substring
- * @s: input
- * @accept: input
- * Return: Always 0 (Success)
+ * _strchr - locates a char in a string
+ * @s: string to be searched
+ * @c: char to be checked
+ *
+ * Return: pointer to the first occurence of c in s
  */
+
+char *_strchr(char *s, char c)
+{
+	int i = 0;
+
+	for (; s[i] != c && s[i] != '\0'; i++)
+	if (s[i] == c)
+		return (s + i);
+	else
+		return (NULL);
+}
+
+/**
+ * _strspn - gets the length of a prefix substring
+ * @s: string to be searched
+ * @accept: string to be used
+ *
+ * Return: number of bytes in the initial segment of s which are part of accept
+ */
+
 unsigned int _strspn(char *s, char *accept)
 {
-	unsigned int i, n, value, check;
+	int i = 0;
+	int match = 0;
 
-	value = 0;
-
-	for (i = 0; s[i] != '\0'; i++)
+	while (s[i] != '\0')
 	{
-		check = 0;
-
-		for (n = 0; accept[n] != '\0'; n++)
-		{
-			if (accept[n] == s[i])
-			{
-				value++;
-				check = 1;
-			}
-		}
-		if (check == 0)
-			return (value);
+		if (_strchr(accept, s[i]) == NULL)
+			break;
+		match++;
+		i++;
 	}
 
-	return (value);
+	return (match);
 }
