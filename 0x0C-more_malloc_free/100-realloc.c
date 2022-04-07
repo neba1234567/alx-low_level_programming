@@ -1,49 +1,66 @@
 #include "main.h"
-#include <stdlib.h>
-
 /**
- * string_nconcat - concatenates two strings.
- * @s1: first string.
- * @s2: second string.
- * @n: amount of bytes.
- *
- * Return: pointer to the allocated memory.
- * if malloc fails, status value is equal to 98.
+ * _memcpy - this function cpy a buffer
+ * @dest: is a buffer that it contains in array
+ * @src: the new value to copy in the buffer
+ * @n: the number of bytes to be altered.
+ * a blank line
+ * Description: this function set memory)?
+ * section header: the header of this function is holberton.h)*
+ * Return: return char
  */
-char *string_nconcat(char *s1, char *s2, unsigned int n)
+char *_memcpy(char *dest, char *src, unsigned int n)
 {
-	char *sout;
-	unsigned int ls1, ls2, lsout, i;
+  int i;
 
-	if (s1 == NULL)
-		s1 = "";
+  for (i = 0; n > 0; i++, n--)
+    {
 
-	if (s2 == NULL)
-		s2 = "";
+      dest[i] = src[i];
+    }
 
-	for (ls1 = 0; s1[ls1] != '\0'; ls1++)
-		;
+  return (dest);
+}
+/**
+ * _realloc - reallocate memory
+ * a blank line
+ *@ptr:the space in memory to realloc
+ *@old_size: the previous size.
+ *@new_size: the new size of the memory
+ * Description: reallocate memory)?
+ * section header: the header of this function is holberton.h)*
+ * Return: no return.
+ */
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
+{
+  void *p;
 
-	for (ls2 = 0; s2[ls2] != '\0'; ls2++)
-		;
-
-	if (n > ls2)
-		n = ls2;
-
-	lsout = ls1 + n;
-
-	sout = malloc(lsout + 1);
-
-	if (sout == NULL)
-		return (NULL);
-
-	for (i = 0; i < lsout; i++)
-		if (i < ls1)
-			sout[i] = s1[i];
-		else
-			sout[i] = s2[i - ls1];
-
-	sout[i] = '\0';
-
-	return (sout);
+  if (new_size == old_size)
+    return (ptr);
+  if (new_size == 0 && ptr != NULL)
+    {
+      free(ptr);
+      return (NULL);
+    }
+  if (ptr == NULL)
+    {
+      p = malloc(new_size);
+      if (p == NULL)
+	{
+	  free(ptr);
+	  return (NULL);
+	}
+      free(ptr);
+      return (p);
+    }
+  p = malloc(new_size);
+  if (p == NULL)
+    {
+      free(ptr);
+      return (NULL);
+    }
+  if (new_size > old_size)
+    _memcpy(p, ptr, old_size);
+  free(ptr);
+  return (p);
 }
