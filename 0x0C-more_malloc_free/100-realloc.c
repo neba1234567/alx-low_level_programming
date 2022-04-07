@@ -1,66 +1,57 @@
 #include "main.h"
+
 /**
- * _memcpy - this function cpy a buffer
- * @dest: is a buffer that it contains in array
- * @src: the new value to copy in the buffer
- * @n: the number of bytes to be altered.
- * a blank line
- * Description: this function set memory)?
- * section header: the header of this function is holberton.h)*
- * Return: return char
+ * _memcpy - copy memory data from src to dest
+ * @dest: memory destination
+ * @src: memory source
+ * @n: size of new memory
  */
-char *_memcpy(char *dest, char *src, unsigned int n)
+void _memcpy(void *dest, void *src, size_t n)
 {
-  int i;
+	size_t i;
+	char *csrc = (char *)src;
+	char *cdest = (char *)dest;
 
-  for (i = 0; n > 0; i++, n--)
-    {
-
-      dest[i] = src[i];
-    }
-
-  return (dest);
+	for (i = 0; i < n; i++)
+		cdest[i] = csrc[i];
 }
+
 /**
- * _realloc - reallocate memory
- * a blank line
- *@ptr:the space in memory to realloc
- *@old_size: the previous size.
- *@new_size: the new size of the memory
- * Description: reallocate memory)?
- * section header: the header of this function is holberton.h)*
- * Return: no return.
+ * *_realloc - reallocates a memory block using malloc and free
+ * @ptr: array length
+ * @old_size: size of old memory
+ * @new_size: size of new memory
+ * Return: pointer to new memory
  */
+
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-  void *p;
 
-  if (new_size == old_size)
-    return (ptr);
-  if (new_size == 0 && ptr != NULL)
-    {
-      free(ptr);
-      return (NULL);
-    }
-  if (ptr == NULL)
-    {
-      p = malloc(new_size);
-      if (p == NULL)
+void *newPtr;
+if (new_size == 0)
+{
+	if (ptr != NULL)
+		free(ptr);
+	return (NULL);
+}
+else if (!ptr)
+{
+	return (malloc(new_size));
+}
+else if (new_size <= old_size)
+{
+	return (ptr);
+}
+else
+{
+	newPtr = malloc(new_size);
+	if (newPtr)
 	{
-	  free(ptr);
-	  return (NULL);
+		_memcpy(newPtr, ptr, old_size);
+		free(ptr);
 	}
-      free(ptr);
-      return (p);
-    }
-  p = malloc(new_size);
-  if (p == NULL)
-    {
-      free(ptr);
-      return (NULL);
-    }
-  if (new_size > old_size)
-    _memcpy(p, ptr, old_size);
-  free(ptr);
-  return (p);
+	return (newPtr);
+}
+
+return (0);
 }
